@@ -1,0 +1,46 @@
+directories:
+  output: out/win32-x64
+  buildResources: build
+appId: com.anclaw.app
+productName: AnClaw
+copyright: Copyright © 2025 AnClaw
+files:
+  - filter:
+      - dist/**/*
+      - web-ui/dist/**/*
+      - assets/**/*
+      - package.json
+afterPack: ./scripts/afterPack.js
+mac:
+  target:
+    - dmg
+    - zip
+  icon: assets/icon.icns
+  category: public.app-category.productivity
+  artifactName: AnClaw-${version}-${arch}-mac.${ext}
+  hardenedRuntime: true
+  gatekeeperAssess: false
+publish:
+  provider: generic
+  url: https://anclaw.example.com/releases/
+dmg:
+  sign: false
+  writeUpdateInfo: false
+  artifactName: AnClaw-${version}-${arch}.${ext}
+win:
+  target: nsis
+  icon: assets/icon.ico
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  include: scripts/installer.nsh
+  installerIcon: assets/icon.ico
+  uninstallerIcon: assets/icon.ico
+  installerHeaderIcon: assets/icon.ico
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  runAfterFinish: true
+  differentialPackage: false
+  artifactName: AnClaw-Setup-${version}-${arch}.${ext}
+electronVersion: 40.8.5
